@@ -2,26 +2,29 @@ package parkinglot
 
 import scala.collection.mutable
 
-case class ParkingLot(capacity: Int = 100, owner: ParkingLotOwner) {
+case class ParkingLot(private val capacity: Int = 100, owner: ParkingLotOwner) {
 
   val parkedCars: mutable.Set[Car] = mutable.HashSet[Car]()
 
   def park(car: Car): Boolean = {
-    parkedCars.add(car)
-    notifyOwnerIfFull()
-    true
-  }
-
-  private def notifyOwnerIfFull(): Unit = {
-    if (parkedCars.size == capacity) {
-      owner.parkingLotIsFull(this)
+    if (parkingLotIsFull) {
+      return false
     }
+    parkedCars.add(car)
+    notifyOwnerIfParkingLotIsFull()
+    true
   }
 
   def retrieve(car: Car): Option[Car] = {
     val parkedCar = removeCarFromParking(car)
-    notifyOwnerIfFree()
+    notifyOwnerIfParkingLotHasFreeSlots()
     parkedCar
+  }
+
+  private def notifyOwnerIfParkingLotIsFull(): Unit = {
+    if (parkingLotIsFull) {
+      owner.parkingLotIsFull(this)
+    }
   }
 
   private def removeCarFromParking(carToRetrieve: Car) = {
@@ -30,9 +33,15 @@ case class ParkingLot(capacity: Int = 100, owner: ParkingLotOwner) {
     parkedCar
   }
 
-  private def notifyOwnerIfFree(): Unit = {
-    if (parkedCars.size != capacity) {
-      owner.parkingLotIsFree(this)
+  private def notifyOwnerIfParkingLotHasFreeSlots(): Unit = {
+    if (parkingLotHasFreeSlots) {
+      owner.parkingLotHasFreeSlots(this)
     }
   }
+
+  private def parkingLotIsFull = {
+    parkedCars.size == capacity
+  }
+
+  private def parkingLotHasFreeSlots = !parkingLotIsFull
 }
