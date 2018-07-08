@@ -7,28 +7,9 @@ case class OwnerFairAttendant(private val parkingLots: Seq[ParkingLot]) extends 
   private var nextParkingLotToBeServed = parkingLots.head
 
   override def park(car: Car): Boolean = {
-    parkFairly(car, parkingLots)
-  }
-
-  private def parkFairly(car: Car, remainingParkingLots: Seq[ParkingLot]): Boolean = {
-    if (remainingParkingLots.isEmpty) {
-      return false
-    }
-
-    if (remainingParkingLots.head == nextParkingLotToBeServed) {
-      remainingParkingLots.head.park(car)
-      nextParkingLotToBeServed = findNextParkingLotToBeServed(remainingParkingLots.tail)
-      return true
-    }
-
-    parkFairly(car, remainingParkingLots.tail)
-  }
-
-  private def findNextParkingLotToBeServed(remainingParkingLots: Seq[ParkingLot]) = {
-    if (remainingParkingLots.isEmpty){
-      parkingLots.head
-    } else {
-      remainingParkingLots.head
-    }
+    val circularIterator = Iterator.continually(parkingLots).flatten
+    val parkingLot = circularIterator.find(_ == nextParkingLotToBeServed)
+    nextParkingLotToBeServed = circularIterator.next()
+    parkingLot.fold(false)(_.park(car))
   }
 }
