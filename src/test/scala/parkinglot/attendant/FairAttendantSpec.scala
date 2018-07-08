@@ -9,21 +9,31 @@ import org.mockito.Mockito._
 
 class FairAttendantSpec extends WordSpec with MustMatchers with MockitoSugar{
   "EventAttendant" should {
-    "park car evenly among parking lots" in {
-      val firstParkingLot = mockFreeSlotsParkingLot()
-      val secondParkingLot = mockFreeSlotsParkingLot()
-      val attendant = FairAttendant(Seq(firstParkingLot, secondParkingLot))
+    "park car evenly among parking lots" when {
 
-      attendant.park(new Car())
-      attendant.park(new Car())
+      "parking two cars in two parking lots" in {
+        val firstParkingLot = mockFreeSlotsParkingLot()
+        val secondParkingLot = mockFreeSlotsParkingLot()
+        val attendant = FairAttendant(Seq(firstParkingLot, secondParkingLot))
 
-      verify(firstParkingLot).park(any[Car])
-      verify(secondParkingLot).park(any[Car])
+        attendant.park(new Car()) mustBe true
+        attendant.park(new Car()) mustBe true
+        verify(firstParkingLot).park(any[Car])
+        verify(secondParkingLot).park(any[Car])
+      }
+
+      "parking three cars in two parking lots" in {
+        val firstParkingLot = mockFreeSlotsParkingLot()
+        val secondParkingLot = mockFreeSlotsParkingLot()
+        val attendant = FairAttendant(Seq(firstParkingLot, secondParkingLot))
+
+        attendant.park(new Car()) mustBe true
+        attendant.park(new Car()) mustBe true
+        attendant.park(new Car()) mustBe true
+        verify(firstParkingLot, times(2)).park(any[Car])
+        verify(secondParkingLot).park(any[Car])
+      }
     }
-
-    // 3 cars and two parking lots
-
-    // empty sequence of parking lot in the constructor
   }
 
   private def mockFreeSlotsParkingLot(): ParkingLot = {

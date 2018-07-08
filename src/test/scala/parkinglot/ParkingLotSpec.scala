@@ -49,5 +49,12 @@ class ParkingLotSpec extends WordSpec with MustMatchers with MockitoSugar{
 
       verify(owner).parkingLotHasFreeSlots(parkingLot)
     }
+
+    "expose how many slots are left" in {
+      val parkingLot = ParkingLot(capacity = 3, owner = mock[ParkingLotOwner])
+      parkingLot.park(new Car())
+
+      parkingLot.freeSlots mustBe 2
+    }
   }
 }

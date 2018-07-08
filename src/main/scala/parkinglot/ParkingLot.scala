@@ -3,7 +3,6 @@ package parkinglot
 import scala.collection.mutable
 
 case class ParkingLot(private val capacity: Int = 100, owner: ParkingLotOwner) {
-
   val parkedCars: mutable.Set[Car] = mutable.HashSet[Car]()
 
   def park(car: Car): Boolean = {
@@ -20,6 +19,8 @@ case class ParkingLot(private val capacity: Int = 100, owner: ParkingLotOwner) {
     notifyOwnerIfParkingLotHasFreeSlots()
     parkedCar
   }
+
+  def freeSlots: Int = capacity - parkedCars.size
 
   private def notifyOwnerIfParkingLotIsFull(): Unit = {
     if (parkingLotIsFull) {

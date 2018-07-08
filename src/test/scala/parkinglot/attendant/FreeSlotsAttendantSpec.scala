@@ -12,12 +12,10 @@ class FreeSlotsAttendantSpec extends WordSpec with MustMatchers with MockitoSuga
     "park a car in a parking lot with free slots" in {
       val freeSlotsParkingLot = mockFreeSlotsParkingLot()
       val fullParkingLot = mockFullParkingLot()
-      val attendant = FreeSlotsAttendant(Seq(freeSlotsParkingLot, fullParkingLot))
-      val car = new Car()
+      val attendant = FreeSlotsAttendant(Seq(fullParkingLot, freeSlotsParkingLot))
 
-      attendant.park(car)
-
-      verify(freeSlotsParkingLot).park(car)
+      attendant.park(new Car()) mustBe true
+      verify(freeSlotsParkingLot).park(any[Car])
     }
   }
 
