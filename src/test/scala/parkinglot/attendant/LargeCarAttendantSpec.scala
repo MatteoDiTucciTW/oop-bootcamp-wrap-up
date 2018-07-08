@@ -19,7 +19,7 @@ class LargeCarAttendantSpec extends WordSpec with MustMatchers with MockitoSugar
       verify(twoSlotsLeftParkingLot, never()).park(any[LargeCar])
     }
 
-    "park a normal car in the first parking lot available" in {
+    "park a car in the first parking lot available" in {
       val threeSlotsLeftParkingLot = createThreeSlotsLeftParkingLot()
       val twoSlotsLeftParkingLot = createTwoSlotsLeftParkingLot()
       val attendant = LargeCarAttendant(Seq(twoSlotsLeftParkingLot, threeSlotsLeftParkingLot))
