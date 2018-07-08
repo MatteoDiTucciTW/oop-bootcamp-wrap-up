@@ -6,13 +6,13 @@ import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{MustMatchers, WordSpec}
 import parkinglot.{Car, ParkingLot}
 
-class FreeSlotsAttendantSpec extends WordSpec with MustMatchers with MockitoSugar {
-  "FreeSlotsAttendant" should {
+class DriverFairAttendantSpec extends WordSpec with MustMatchers with MockitoSugar {
+  "DriverFairAttendant" should {
 
     "park a car in a parking lot with free slots" in {
       val freeSlotsParkingLot = mockFreeSlotsParkingLot()
       val fullParkingLot = mockFullParkingLot()
-      val attendant = FreeSlotsAttendant(Seq(fullParkingLot, freeSlotsParkingLot))
+      val attendant = DriverFairAttendant(Seq(fullParkingLot, freeSlotsParkingLot))
 
       attendant.park(new Car()) mustBe true
       verify(freeSlotsParkingLot).park(any[Car])

@@ -7,14 +7,14 @@ import org.scalatest.{MustMatchers, WordSpec}
 import parkinglot.{Car, ParkingLot}
 import org.mockito.Mockito._
 
-class FairAttendantSpec extends WordSpec with MustMatchers with MockitoSugar{
-  "EventAttendant" should {
+class OwnerFairAttendantSpec extends WordSpec with MustMatchers with MockitoSugar{
+  "OwnerFairAttendant" should {
     "park car evenly among parking lots" when {
 
       "parking two cars in two parking lots" in {
         val firstParkingLot = mockFreeSlotsParkingLot()
         val secondParkingLot = mockFreeSlotsParkingLot()
-        val attendant = FairAttendant(Seq(firstParkingLot, secondParkingLot))
+        val attendant = OwnerFairAttendant(Seq(firstParkingLot, secondParkingLot))
 
         attendant.park(new Car()) mustBe true
         attendant.park(new Car()) mustBe true
@@ -25,7 +25,7 @@ class FairAttendantSpec extends WordSpec with MustMatchers with MockitoSugar{
       "parking three cars in two parking lots" in {
         val firstParkingLot = mockFreeSlotsParkingLot()
         val secondParkingLot = mockFreeSlotsParkingLot()
-        val attendant = FairAttendant(Seq(firstParkingLot, secondParkingLot))
+        val attendant = OwnerFairAttendant(Seq(firstParkingLot, secondParkingLot))
 
         attendant.park(new Car()) mustBe true
         attendant.park(new Car()) mustBe true

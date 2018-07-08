@@ -2,7 +2,7 @@ package parkinglot.attendant
 
 import parkinglot.{Attendant, Car, ParkingLot}
 
-case class FairAttendant(private val parkingLots: Seq[ParkingLot]) extends Attendant {
+case class OwnerFairAttendant(private val parkingLots: Seq[ParkingLot]) extends Attendant {
 
   private var nextParkingLotToBeServed = parkingLots.head
 
