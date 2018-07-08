@@ -9,14 +9,14 @@ class ParkingLotSpec extends WordSpec with MustMatchers with MockitoSugar{
   "ParkingLot" should {
 
     "park a car" in {
-      val parkingLot = ParkingLot(owner = mock[ParkingLotOwner])
+      val parkingLot = new ParkingLot(owner = mock[ParkingLotOwner])
       val car = new Car()
 
       parkingLot.park(car) mustBe true
     }
 
     "retrieve a parked a car" in {
-      val parkingLot = ParkingLot(owner = mock[ParkingLotOwner])
+      val parkingLot = new ParkingLot(owner = mock[ParkingLotOwner])
       val car = new Car()
       parkingLot.park(car)
 
@@ -24,7 +24,7 @@ class ParkingLotSpec extends WordSpec with MustMatchers with MockitoSugar{
     }
 
     "not retrieve a not parked car" in {
-      val parkingLot = ParkingLot(owner = mock[ParkingLotOwner])
+      val parkingLot = new ParkingLot(owner = mock[ParkingLotOwner])
       val car = new Car()
 
       parkingLot.retrieve(car) mustBe None
@@ -32,7 +32,7 @@ class ParkingLotSpec extends WordSpec with MustMatchers with MockitoSugar{
 
     "notify its owner when it is full" in {
       val owner = mock[ParkingLotOwner]
-      val parkingLot = ParkingLot(capacity = 1, owner = owner)
+      val parkingLot = new ParkingLot(capacity = 1, owner = owner)
 
       parkingLot.park(new Car())
 
@@ -41,7 +41,7 @@ class ParkingLotSpec extends WordSpec with MustMatchers with MockitoSugar{
 
     "notify its owner when it becomes free" in {
       val owner = mock[ParkingLotOwner]
-      val parkingLot = ParkingLot(capacity = 1, owner = owner)
+      val parkingLot = new ParkingLot(capacity = 1, owner = owner)
       val car = new Car()
       parkingLot.park(car)
 
@@ -51,7 +51,7 @@ class ParkingLotSpec extends WordSpec with MustMatchers with MockitoSugar{
     }
 
     "expose how many slots are left" in {
-      val parkingLot = ParkingLot(capacity = 3, owner = mock[ParkingLotOwner])
+      val parkingLot = new ParkingLot(capacity = 3, owner = mock[ParkingLotOwner])
       parkingLot.park(new Car())
 
       parkingLot.freeSlots mustBe 2
