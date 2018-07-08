@@ -15,12 +15,5 @@ case class LargeCarAttendant(private val parkingLots: Seq[ParkingLot]) extends A
     true
   }
 
-  private def parkOtherCar(car: Car): Boolean = {
-    parkingLots.foreach(parkingLot => {
-      if (parkingLot.park(car)) {
-        return true
-      }
-    })
-    false
-  }
+  private def parkOtherCar(car: Car): Boolean = parkingLots.find(_.park(car)).fold(false)(_ => true)
 }
