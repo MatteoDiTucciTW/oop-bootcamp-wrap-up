@@ -1,6 +1,6 @@
 package parkinglot
 
-case class ParkingLotOwner() {
+class ParkingLotOwner() {
 
   def parkingLotIsFull(parkingLot: ParkingLot): Unit = ()
 
