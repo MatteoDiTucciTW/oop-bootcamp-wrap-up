@@ -1,4 +1,4 @@
-package measure
+package measurement
 
 import org.scalatest.{MustMatchers, WordSpec}
 

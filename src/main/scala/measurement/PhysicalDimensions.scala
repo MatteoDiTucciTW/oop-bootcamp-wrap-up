@@ -1,4 +1,4 @@
-package measure
+package measurement
 
 trait Length
 trait Volume

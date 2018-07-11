@@ -1,4 +1,4 @@
-package measure
+package measurement
 
 abstract class UnitOfMeasurement[T](val conversionToBaseUnit: BigDecimal => BigDecimal)
 

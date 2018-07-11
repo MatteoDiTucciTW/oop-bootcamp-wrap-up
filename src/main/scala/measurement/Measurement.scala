@@ -1,4 +1,4 @@
-package measure
+package measurement
 
 case class Measurement[T](private val quantity: BigDecimal, private val unit: UnitOfMeasurement[T]) {
 
