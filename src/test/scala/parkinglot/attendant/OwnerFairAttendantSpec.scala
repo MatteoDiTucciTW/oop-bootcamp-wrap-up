@@ -4,7 +4,7 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{MustMatchers, WordSpec}
-import parkinglot.{Car, ParkingLot}
+import parkinglot.{Car, CarFactory, ParkingLot}
 import org.mockito.Mockito._
 
 class OwnerFairAttendantSpec extends WordSpec with MustMatchers with MockitoSugar{
@@ -16,8 +16,8 @@ class OwnerFairAttendantSpec extends WordSpec with MustMatchers with MockitoSuga
         val secondParkingLot = mockFreeSlotsParkingLot()
         val attendant = OwnerFairAttendant(Seq(firstParkingLot, secondParkingLot))
 
-        attendant.park(new Car()) mustBe true
-        attendant.park(new Car()) mustBe true
+        attendant.park(CarFactory.createCar()) mustBe true
+        attendant.park(CarFactory.createCar()) mustBe true
         verify(firstParkingLot).park(any[Car])
         verify(secondParkingLot).park(any[Car])
       }
@@ -27,9 +27,9 @@ class OwnerFairAttendantSpec extends WordSpec with MustMatchers with MockitoSuga
         val secondParkingLot = mockFreeSlotsParkingLot()
         val attendant = OwnerFairAttendant(Seq(firstParkingLot, secondParkingLot))
 
-        attendant.park(new Car()) mustBe true
-        attendant.park(new Car()) mustBe true
-        attendant.park(new Car()) mustBe true
+        attendant.park(CarFactory.createCar()) mustBe true
+        attendant.park(CarFactory.createCar()) mustBe true
+        attendant.park(CarFactory.createCar()) mustBe true
         verify(firstParkingLot, times(2)).park(any[Car])
         verify(secondParkingLot).park(any[Car])
       }

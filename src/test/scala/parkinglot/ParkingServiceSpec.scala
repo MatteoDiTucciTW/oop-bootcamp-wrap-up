@@ -10,9 +10,9 @@ class ParkingServiceSpec extends FeatureSpec with MustMatchers with GivenWhenThe
       val farParkingLot = new ParkingLot(capacity = 10, owner = new ParkingLotOwner())
       val attendant = DriverFairAttendant(Seq(nearParkingLot, farParkingLot))
 
-      attendant.park(new Car())
-      attendant.park(new Car())
-      attendant.park(new Car())
+      attendant.park(CarFactory.createCar())
+      attendant.park(CarFactory.createCar())
+      attendant.park(CarFactory.createCar())
 
       nearParkingLot.freeSlots mustBe 7
       farParkingLot.freeSlots mustBe 10
@@ -23,9 +23,9 @@ class ParkingServiceSpec extends FeatureSpec with MustMatchers with GivenWhenThe
       val emilyParkingLot = new ParkingLot(capacity = 10, owner = new ParkingLotOwner())
       val attendant = OwnerFairAttendant(Seq(robertParkingLot, emilyParkingLot))
 
-      attendant.park(new Car())
-      attendant.park(new Car())
-      attendant.park(new Car())
+      attendant.park(CarFactory.createCar())
+      attendant.park(CarFactory.createCar())
+      attendant.park(CarFactory.createCar())
 
       robertParkingLot.freeSlots mustBe 8
       emilyParkingLot.freeSlots mustBe 9
@@ -36,9 +36,9 @@ class ParkingServiceSpec extends FeatureSpec with MustMatchers with GivenWhenThe
       val highFreeSlotsParkingLot = new ParkingLot(capacity = 10, owner = new ParkingLotOwner())
       val attendant = LargeCarAttendant(Seq(lowFreeSlotsParkingLot, highFreeSlotsParkingLot))
 
-      attendant.park(new LargeCar())
-      attendant.park(new LargeCar())
-      attendant.park(new LargeCar())
+      attendant.park(CarFactory.createLargeCar())
+      attendant.park(CarFactory.createLargeCar())
+      attendant.park(CarFactory.createLargeCar())
 
       lowFreeSlotsParkingLot.freeSlots mustBe 5
       highFreeSlotsParkingLot.freeSlots mustBe 7
@@ -49,9 +49,9 @@ class ParkingServiceSpec extends FeatureSpec with MustMatchers with GivenWhenThe
       val farParkingLot = new ParkingLot(capacity = 10, owner = new ParkingLotOwner())
       val attendant = HandicappedCarAttendant(Seq(nearParkingLot, farParkingLot))
 
-      attendant.park(new HandicappedCar())
-      attendant.park(new HandicappedCar())
-      attendant.park(new HandicappedCar())
+      attendant.park(CarFactory.createHandicappedCar())
+      attendant.park(CarFactory.createHandicappedCar())
+      attendant.park(CarFactory.createHandicappedCar())
 
       nearParkingLot.freeSlots mustBe 7
       farParkingLot.freeSlots mustBe 10

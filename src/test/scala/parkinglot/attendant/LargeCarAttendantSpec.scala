@@ -1,7 +1,7 @@
 package parkinglot.attendant
 
 import org.scalatest.{MustMatchers, WordSpec}
-import parkinglot.{Car, LargeCar, ParkingLot}
+import parkinglot.{Car, CarFactory, LargeCar, ParkingLot}
 import org.mockito.Mockito._
 import org.mockito.ArgumentMatchers._
 import org.scalatest.mockito.MockitoSugar
@@ -14,7 +14,7 @@ class LargeCarAttendantSpec extends WordSpec with MustMatchers with MockitoSugar
       val twoSlotsLeftParkingLot = createTwoSlotsLeftParkingLot()
       val attendant = LargeCarAttendant(Seq(twoSlotsLeftParkingLot, threeSlotsLeftParkingLot))
 
-      attendant.park(new LargeCar()) mustBe true
+      attendant.park(CarFactory.createLargeCar()) mustBe true
       verify(threeSlotsLeftParkingLot).park(any[LargeCar])
       verify(twoSlotsLeftParkingLot, never()).park(any[LargeCar])
     }
@@ -24,7 +24,7 @@ class LargeCarAttendantSpec extends WordSpec with MustMatchers with MockitoSugar
       val twoSlotsLeftParkingLot = createTwoSlotsLeftParkingLot()
       val attendant = LargeCarAttendant(Seq(twoSlotsLeftParkingLot, threeSlotsLeftParkingLot))
 
-      attendant.park(new Car()) mustBe true
+      attendant.park(CarFactory.createCar()) mustBe true
       verify(twoSlotsLeftParkingLot).park(any[Car])
       verify(threeSlotsLeftParkingLot, never()).park(any[Car])
     }
