@@ -4,7 +4,7 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{MustMatchers, WordSpec}
-import parkinglot.{Car, CarFactory, HandicappedCar, ParkingLot}
+import parkinglot.{Car, HandicappedCar, ParkingLot}
 import org.mockito.Mockito._
 
 class HandicappedCarAttendantSpec extends WordSpec with MustMatchers with MockitoSugar{
@@ -14,7 +14,7 @@ class HandicappedCarAttendantSpec extends WordSpec with MustMatchers with Mockit
       val farParkingLot = mockFreeSlotsParkingLot()
       val attendant = HandicappedCarAttendant(Seq(nearParkingLot, farParkingLot))
 
-      attendant.park(CarFactory.createHandicappedCar()) mustBe true
+      attendant.park(new HandicappedCar()) mustBe true
       verify(nearParkingLot).park(any[HandicappedCar])
     }
 
@@ -23,7 +23,7 @@ class HandicappedCarAttendantSpec extends WordSpec with MustMatchers with Mockit
       val farParkingLot = mockFreeSlotsParkingLot()
       val attendant = HandicappedCarAttendant(Seq(nearParkingLot, farParkingLot))
 
-      attendant.park(CarFactory.createCar()) mustBe true
+      attendant.park(new Car()) mustBe true
       verify(farParkingLot).park(any[HandicappedCar])
     }
   }
