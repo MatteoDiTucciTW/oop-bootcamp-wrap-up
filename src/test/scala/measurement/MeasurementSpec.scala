@@ -6,63 +6,64 @@ class MeasurementSpec extends WordSpec with MustMatchers{
 
   "Measurement" should {
     "compare feet with inches" in {
-      val oneFoot = Measurement(quantity = 1, unit = Foot)
-      val twelveInches = Measurement(quantity = 12, unit = Inch)
+      val ft_1 = Measurement(quantity = 1, unit = Foot)
+      val inch_12 = Measurement(quantity = 12, unit = Inch)
 
-      oneFoot == twelveInches mustBe true
+      ft_1 == inch_12 mustBe true
     }
 
     "compare feet with yards" in {
-      val threeFeet = Measurement(quantity = 3, unit = Foot)
-      val oneYard = Measurement(quantity = 1, unit = Yard)
+      val ft_3 = Measurement(quantity = 3, unit = Foot)
+      val yard_1 = Measurement(quantity = 1, unit = Yard)
 
-      threeFeet == oneYard mustBe true
+      ft_3 == yard_1 mustBe true
     }
 
     "compare inches with centimeters" in {
-      val twoInches = Measurement(quantity = 2, unit = Inch)
-      val fivePointHeightCentimeters = Measurement(quantity = 5.08, unit = Centimeter)
+      val inch_2 = Measurement(quantity = 2, unit = Inch)
+      val cm_5_08 = Measurement(quantity = 5.08, unit = Centimeter)
 
-      twoInches == fivePointHeightCentimeters mustBe true
+      inch_2 == cm_5_08 mustBe true
     }
 
     "add inches with inches" in {
-      val twoInches = Measurement(quantity = 2, unit = Inch)
-      val fourInches = Measurement(quantity = 4, unit = Inch)
+      val inch_2 = Measurement(quantity = 2, unit = Inch)
+      val inch_4 = Measurement(quantity = 4, unit = Inch)
 
-      twoInches + twoInches mustBe fourInches
+      inch_2 + inch_2 mustBe inch_4
     }
 
     "add inches with centimeters" in {
-      val twoInches = Measurement(quantity = 2, unit = Inch)
-      val twoPointFiftyFourCentimeters = Measurement(quantity = 2.54, unit = Centimeter)
-      val threeInches = Measurement(quantity = 3, unit = Inch)
+      val inch_2 = Measurement(quantity = 2, unit = Inch)
+      val cm_2_54 = Measurement(quantity = 2.54, unit = Centimeter)
+      val inch_3 = Measurement(quantity = 3, unit = Inch)
 
-      twoInches + twoPointFiftyFourCentimeters mustBe threeInches
+      inch_2 + cm_2_54 mustBe inch_3
     }
 
     "compare gallons with liters" in {
-      val oneGallon = Measurement(quantity = 1, unit = Gallon)
-      val threePointSeventyHeightLiters = Measurement(quantity = 3.7854, unit = Liter)
+      val gal_1 = Measurement(quantity = 1, unit = Gallon)
+      val lt_3_79 = Measurement(quantity = 3.79, unit = Liter)
 
-      oneGallon == threePointSeventyHeightLiters mustBe true
+      gal_1 == lt_3_79 mustBe true
     }
 
     "add gallons with liters" in {
-      val oneGallon = Measurement(quantity = 1, unit = Gallon)
-      val oneLiter = Measurement(quantity = 1, unit = Liter)
-      val fourPointSeventyEightLiters = Measurement(quantity = 4.7854, unit = Liter)
+      val gal_1 = Measurement(quantity = 1, unit = Gallon)
+      val lt_1 = Measurement(quantity = 1, unit = Liter)
+      val lt_4_79 = Measurement(quantity = 4.79, unit = Liter)
 
-      oneGallon + oneLiter mustBe fourPointSeventyEightLiters
+      lt_1 + gal_1 mustBe lt_4_79
     }
 
     "compare Fahrenheit with Celsius" in {
-      val twoHundredTwelveFahrenheit = Measurement(quantity = 212, unit = Fahrenheit)
-      val oneHundredCelsius = Measurement(quantity = 100, unit = Celsius)
+      val f_212 = Measurement(quantity = 212, unit = Fahrenheit)
+      val c_100 = Measurement(quantity = 100, unit = Celsius)
 
-      twoHundredTwelveFahrenheit == oneHundredCelsius mustBe true
+      f_212 == c_100 mustBe true
     }
 
+      // show use of generic for compilation time check
 //    "add liters with centimeters" in {
 //      val oneLiter = Measurement(quantity = 1, unit = Liter)
 //      val oneCentimeter = Measurement(quantity = 1, unit = Centimeter)
